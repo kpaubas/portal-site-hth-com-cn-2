@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://kpaubas.github.io/portal-site-hth-com-cn-2/sitemap.xml
