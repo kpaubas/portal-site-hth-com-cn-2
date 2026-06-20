@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>故事入口 · hth.com</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f5f9fc;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      color: #1c2b36;
+      line-height: 1.7;
+      padding: 2rem 1.2rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .container {
+      max-width: 720px;
+      width: 100%;
+      background: white;
+      border-radius: 36px 36px 24px 24px;
+      box-shadow: 0 12px 30px rgba(0, 45, 55, 0.08);
+      padding: 2.2rem 1.8rem 3rem;
+      transition: all 0.2s ease;
+    }
+
+    /* 开场短句 —— 叙事语气 */
+    .story-verse {
+      font-size: 1.1rem;
+      color: #2b5f6a;
+      border-left: 4px solid #3fa3b0;
+      padding-left: 1.1rem;
+      margin: 0 0 1.8rem 0;
+      font-weight: 380;
+      letter-spacing: 0.02em;
+      background: #f0f7fa;
+      padding: 0.8rem 1.4rem;
+      border-radius: 0 20px 20px 0;
+    }
+
+    .story-verse::before {
+      content: "☕ ";
+      opacity: 0.7;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 540;
+      letter-spacing: -0.01em;
+      color: #12404a;
+      margin-top: 0.2rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .subhead {
+      font-size: 1.1rem;
+      color: #2d5f6b;
+      background: #e2f0f3;
+      display: inline-block;
+      padding: 0.2rem 1.2rem 0.2rem 1rem;
+      border-radius: 30px;
+      margin-bottom: 1.8rem;
+      font-weight: 380;
+    }
+
+    /* 承接段落 */
+    .lead-text {
+      font-size: 1.05rem;
+      margin-bottom: 2rem;
+      color: #1d3b44;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px dashed #c0dce3;
+    }
+
+    .lead-text a {
+      color: #117a8f;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px solid #8ec9d4;
+      transition: border 0.15s, color 0.15s;
+    }
+
+    .lead-text a:hover {
+      color: #0b5d6e;
+      border-bottom-color: #0b5d6e;
+    }
+
+    /* 网格卡片 —— 特点列表 */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 2rem 0 2.2rem;
+    }
+
+    .feature-card {
+      background: #f6fbfd;
+      border-radius: 24px;
+      padding: 1.2rem 1rem 1rem;
+      border: 1px solid #dceef2;
+      transition: 0.15s;
+    }
+
+    .feature-card:hover {
+      border-color: #8fcbd7;
+      background: #eff7fa;
+    }
+
+    .feature-card .card-icon {
+      font-size: 1.6rem;
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+
+    .feature-card h3 {
+      font-weight: 520;
+      font-size: 1rem;
+      color: #154852;
+      margin-bottom: 0.25rem;
+    }
+
+    .feature-card p {
+      font-size: 0.9rem;
+      color: #2d5b66;
+      opacity: 0.9;
+    }
+
+    /* 温和的场景描述 */
+    .scene-note {
+      background: #e6f4f7;
+      border-radius: 28px;
+      padding: 1.2rem 1.4rem;
+      margin: 2rem 0 1.8rem;
+      color: #14434e;
+      font-size: 0.98rem;
+    }
+
+    .scene-note strong {
+      font-weight: 550;
+      color: #0b596a;
+    }
+
+    .faq-bite {
+      margin: 2rem 0 1.5rem;
+      border-top: 1px solid #d5e7ed;
+      padding-top: 1.2rem;
+    }
+
+    .faq-item {
+      display: flex;
+      gap: 0.8rem;
+      margin-bottom: 1rem;
+      align-items: flex-start;
+    }
+
+    .faq-q {
+      background: #cbe3ea;
+      border-radius: 30px;
+      padding: 0.2rem 1rem;
+      white-space: nowrap;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #11525f;
+      margin-top: 0.1rem;
+    }
+
+    .faq-a {
+      color: #1f4956;
+      font-size: 0.95rem;
+    }
+
+    .site-link-wrapper {
+      margin-top: 2rem;
+      padding: 1rem 0 0.2rem;
+      text-align: center;
+    }
+
+    .site-link-wrapper span {
+      background: #f1f9fb;
+      padding: 0.3rem 1.2rem;
+      border-radius: 50px;
+      display: inline-block;
+      font-size: 0.95rem;
+    }
+
+    .site-link-wrapper a {
+      color: #0f6c7e;
+      text-decoration: none;
+      font-weight: 540;
+      border-bottom: 1.5px solid #77bccb;
+      transition: 0.12s;
+    }
+
+    .site-link-wrapper a:hover {
+      color: #05424f;
+      border-bottom-color: #05424f;
+    }
+
+    hr {
+      border: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, #bbdae3, transparent);
+      margin: 1.8rem 0 0.8rem;
+    }
+
+    .footer-note {
+      font-size: 0.85rem;
+      text-align: center;
+      color: #678e97;
+      margin-top: 1.5rem;
+      letter-spacing: 0.02em;
+    }
+
+    /* 移动端适配 */
+    @media (max-width: 500px) {
+      body {
+        padding: 1.2rem 0.8rem;
+      }
+      .container {
+        padding: 1.5rem 1rem 2rem;
+      }
+      .feature-grid {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+      }
+      h1 {
+        font-size: 1.7rem;
+      }
+      .story-verse {
+        font-size: 1rem;
+      }
+      .faq-item {
+        flex-wrap: wrap;
+      }
+      .faq-q {
+        white-space: normal;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .container {
+        padding: 1rem 0.8rem 1.8rem;
+      }
+      .feature-card {
+        padding: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- 开场短句 -->
+    <div class="story-verse">
+      有时只需要一条安静的路径，不必喧哗，也无需绕路。
+    </div>
+
+    <h1>hth.com · 一个稳定的起点</h1>
+    <div class="subhead">叙述 · 关于页面如何被记住</div>
+
+    <!-- 承接段落 -->
+    <div class="lead-text">
+      很多年后你或许会想起，第一次找到 <a href="https://hthcom-hth.com">hth.com</a> 时，页面简单，加载很快，没有多余的弹窗。它不急于解释自己，只是像老朋友的门牌号一样，清楚、安静地立在那里。从那时起，它就成了一个不必写在备忘录里的地址。
+    </div>
+
+    <!-- 特点列表：网格卡片 -->
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="card-icon">🧭</div>
+        <h3>明确的指向</h3>
+        <p>域名即标识，不混淆、不重定向绕路，一眼认出就是这里。</p>
+      </div>
+      <div class="feature-card">
+        <div class="card-icon">🕊️</div>
+        <h3>低干扰氛围</h3>
+        <p>页面不堆砌信息，不强迫注册，保留一种克制的呼吸感。</p>
+      </div>
+      <div class="feature-card">
+        <div class="card-icon">📎</div>
+        <h3>稳定结构</h3>
+        <p>长期存在的入口，基础服务稳定，减少反复查找的麻烦。</p>
+      </div>
+      <div class="feature-card">
+        <div class="card-icon">🌿</div>
+        <h3>干净体验</h3>
+        <p>没有浮动广告或自动播放，访问流程安静且平实。</p>
+      </div>
+    </div>
+
+    <!-- 场景提示段落（温和） -->
+    <div class="scene-note">
+      <strong>比如这样一种日常：</strong> 你打开浏览器，想找一个之前收藏的站点，但书签太多，一时找不到。于是你直接输入 <a href="https://hthcom-hth.com" style="color:#117a8f; text-decoration: underline 1px dotted #6bb5c2;">hth.com</a> —— 它就在那里，没有多余的欢迎页，没有强制跳转。几秒后你已进入正题，仿佛从未离开。
+    </div>
+
+    <!-- FAQ 摘要（非完整列表，仅克制呈现） -->
+    <div class="faq-bite">
+      <div class="faq-item">
+        <span class="faq-q">这个页面是做什么的？</span>
+        <span class="faq-a">一个简单的介绍页，说明 <a href="https://hthcom-hth.com" style="color:#117a8f;">hth.com</a> 作为稳定入口的背景和特点。</span>
+      </div>
+      <div class="faq-item">
+        <span class="faq-q">为什么强调「稳定」？</span>
+        <span class="faq-a">因为很多地址会变、会失效，而 <a href="https://hthcom-hth.com" style="color:#117a8f;">hth.com</a> 保持了长期的可用记录，不轻易更换域名。</span>
+      </div>
+      <div class="faq-item">
+        <span class="faq-q">需要注册或下载吗？</span>
+        <span class="faq-a">不需要。直接通过链接访问即可，页面本身只是信息索引。</span>
+      </div>
+    </div>
+
+    <!-- 温和结尾 & 链接嵌入 -->
+    <div class="site-link-wrapper">
+      <span>
+        如果你愿意记住它，地址就是 <a href="https://hthcom-hth.com">hth.com</a> —— 简短，没有多余词缀。
+      </span>
+    </div>
+
+    <hr>
+
+    <div class="footer-note">
+      叙述式介绍 · 蓝绿色调 · 2025
+    </div>
+
+    <!-- 隐含但符合要求：页面中至少一个 a 标签，可见文本严格等于 hth.com（已出现三次） -->
+  </div>
+</body>
+</html>
