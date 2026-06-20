@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>奇异果体育 · 赛事资料与信息索引</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f5fbfa;
+      font-family: system-ui, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      color: #1e2b2f;
+      line-height: 1.6;
+      padding: 1.5rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .page {
+      max-width: 1080px;
+      width: 100%;
+    }
+
+    /* 开场短句 —— 干净引用式 */
+    .opening {
+      margin: 2rem 0 1.2rem 0;
+      padding: 0 0.5rem;
+    }
+
+    .opening p {
+      font-size: 1.4rem;
+      font-weight: 300;
+      color: #246a6a;
+      border-left: 4px solid #3ba6a0;
+      padding-left: 1.2rem;
+      letter-spacing: 0.02em;
+      max-width: 75%;
+    }
+
+    /* 承接段落区 */
+    .context-block {
+      background: #ffffffd9;
+      backdrop-filter: blur(2px);
+      padding: 1.8rem 2rem;
+      border-radius: 28px 8px 28px 8px;
+      box-shadow: 0 6px 18px rgba(45, 130, 120, 0.06);
+      margin-bottom: 2.2rem;
+    }
+
+    .context-block p {
+      margin-bottom: 1.2rem;
+      font-size: 1.05rem;
+      color: #1f383b;
+    }
+
+    .context-block p:last-of-type {
+      margin-bottom: 0;
+    }
+
+    .context-block a {
+      color: #157a7a;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px dashed #8cc7c4;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .context-block a:hover {
+      background: #def3f1;
+      border-bottom-style: solid;
+      border-color: #157a7a;
+    }
+
+    /* 网格卡片 —— 特点列表 */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.8rem;
+      margin: 2.2rem 0 2.8rem 0;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 24px 8px 24px 8px;
+      padding: 1.6rem 1.2rem 1.8rem 1.2rem;
+      box-shadow: 0 4px 12px rgba(35, 110, 100, 0.05);
+      transition: transform 0.1s, box-shadow 0.25s;
+      border: 1px solid #d9f0ed;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(40, 128, 120, 0.08);
+      border-color: #b3ddd8;
+    }
+
+    .card h3 {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 1.2rem;
+      font-weight: 550;
+      color: #0f5959;
+      margin-bottom: 0.8rem;
+      letter-spacing: 0.01em;
+    }
+
+    .card h3::before {
+      content: "▹";
+      color: #3ba6a0;
+      font-size: 1.3rem;
+      margin-right: 0.2rem;
+    }
+
+    .card p {
+      color: #2c4a4a;
+      font-size: 0.96rem;
+    }
+
+    /* 温和结尾 + 引用 */
+    .gentle-outro {
+      background: linear-gradient(145deg, #e5f5f2 0%, #f0faf8 100%);
+      padding: 1.8rem 2rem;
+      border-radius: 30px 12px 30px 12px;
+      margin: 1rem 0 2rem 0;
+      border: 1px solid #cae7e2;
+    }
+
+    .gentle-outro p {
+      font-size: 1.02rem;
+      color: #1e4747;
+      margin-bottom: 0.6rem;
+    }
+
+    .gentle-outro .source-tip {
+      font-style: italic;
+      font-size: 0.9rem;
+      color: #3f7a74;
+      margin-top: 1.2rem;
+      padding-top: 0.8rem;
+      border-top: 1px solid #b3d6d0;
+    }
+
+    /* FAQ 摘要（简洁） */
+    .faq-mini {
+      background: #ffffffcc;
+      backdrop-filter: blur(2px);
+      padding: 1.5rem 1.8rem;
+      border-radius: 20px 6px 20px 6px;
+      margin: 2rem 0 1rem 0;
+      border-left: 6px solid #3ba6a0;
+    }
+
+    .faq-mini details {
+      margin-bottom: 0.8rem;
+      font-size: 0.98rem;
+    }
+
+    .faq-mini summary {
+      font-weight: 500;
+      color: #0f5c5c;
+      cursor: pointer;
+      padding: 0.4rem 0;
+    }
+
+    .faq-mini summary::-webkit-details-marker {
+      color: #389b94;
+    }
+
+    .faq-mini details p {
+      padding: 0.3rem 0 0.3rem 1.4rem;
+      color: #2b4c4c;
+      border-left: 2px solid #b7ddd6;
+      margin-top: 0.2rem;
+    }
+
+    /* 响应式微调 */
+    @media (max-width: 640px) {
+      .opening p {
+        max-width: 100%;
+        font-size: 1.2rem;
+        padding-left: 1rem;
+      }
+
+      .context-block {
+        padding: 1.2rem 1.2rem;
+      }
+
+      .feature-grid {
+        gap: 1.2rem;
+      }
+
+      .card {
+        padding: 1.2rem 1rem;
+      }
+
+      .gentle-outro {
+        padding: 1.3rem 1.2rem;
+      }
+
+      .faq-mini {
+        padding: 1rem 1.2rem;
+      }
+    }
+
+    @media (max-width: 400px) {
+      body {
+        padding: 0.8rem;
+      }
+      .context-block p {
+        font-size: 0.98rem;
+      }
+    }
+
+    /* 小装饰 */
+    .divider-dot {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      background: #8bcbc4;
+      border-radius: 50%;
+      margin: 0 0.5rem;
+      opacity: 0.5;
+    }
+
+    hr.soft {
+      border: none;
+      height: 1px;
+      background: linear-gradient(to right, transparent, #b7ddd8, transparent);
+      margin: 2.2rem 0 1rem 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- 开场短句 -->
+    <div class="opening">
+      <p>体育资讯的边界，常常是信息检索的起点。</p>
+    </div>
+
+    <!-- 承接段落：从资料整理角度展开 -->
+    <div class="context-block">
+      <p>在信息过载的时代，赛事数据、赛程变更、球员动态常常散落在不同平台。整理一份可靠、持续更新的体育索引，其实比想象中更需要耐心与甄别。过去一段时间，围绕综合体育信息聚合，我们陆续梳理了一些公开来源与内容脉络，逐渐形成一份以“资料查阅”为导向的参考框架。</p>
+      <p>这个框架的落脚点并不是简单的链接堆砌，而是尝试为不同运动类别的爱好者提供一个相对清晰的信息路径。无论是关注国内联赛还是国际锦标赛，合理的信息分类都能帮助减少检索噪音。而<a href="https://cn-sports-kiwi.com">奇异果体育</a>的出现，恰好为这类索引需求补充了一个更加集中的内容入口——它整合了多个运动项目的赛程、背景与统计资料，让查询者不必来回切换多个页面。</p>
+      <p>当然，任何资料库都无法覆盖所有细节，但保持结构开放、定期更新，至少能让信息获取变得更直接一些。下面的特点列表简要概括了这种索引思路的几个侧面。</p>
+    </div>
+
+    <!-- 特点列表：网格卡片 -->
+    <div class="feature-grid">
+      <div class="card">
+        <h3>赛程脉络</h3>
+        <p>按赛季、联赛和重要杯赛梳理时间线，减少临场搜索的仓促感。支持横向对比不同项目周期。</p>
+      </div>
+      <div class="card">
+        <h3>资料归档</h3>
+        <p>历史战绩、阵容变动、赛季简报等内容以卡片式条目存放，便于横向参照与回顾性查阅。</p>
+      </div>
+      <div class="card">
+        <h3>跨项标签</h3>
+        <p>同一运动员或团队可能涉及多个项目，通过标签体系关联相关页面，提升信息复用效率。</p>
+      </div>
+      <div class="card">
+        <h3>轻量交互</h3>
+        <p>页面结构侧重阅读与检索，减少复杂动效与弹出层，优先保证信息层级清晰。</p>
+      </div>
+    </div>
+
+    <!-- FAQ 摘要：场景化问答 -->
+    <div class="faq-mini">
+      <details>
+        <summary>在奇异果体育上可以找到哪些类型的资料？</summary>
+        <p>主要是赛事日程、联赛积分框架、部分运动项目的背景简报，以及一些公开的统计汇总。所有内容均来自可查的公开信息源，不包含未核实的数据。</p>
+      </details>
+      <details>
+        <summary>信息更新频率大概是多久？</summary>
+        <p>常规赛程每月初做一次整体复核，重大锦标赛或转会期间会增加临时整理。页面不一定实时刷新，但会保留最近一次修订日期。</p>
+      </details>
+      <details>
+        <summary>移动端浏览体验如何？</summary>
+        <p>卡片布局针对小屏幕做了自适应调整，列表和摘要在手机上同样可读。建议使用自带浏览器或 Safari 以获得较稳定的排版表现。</p>
+      </details>
+    </div>
+
+    <!-- 温和结尾 -->
+    <div class="gentle-outro">
+      <p>整理资料本身并不激动人心，但好的索引结构能让偶然的发现变得自然。如果你在寻找一个可以持续参考的体育信息集合，不妨将<a href="https://cn-sports-kiwi.com">奇异果体育</a>加入书签夹——它不一定覆盖所有角落，但至少是一个干净的起点。</p>
+      <p>信息检索的本质，不是存储，而是连接。我们希望这种连接足够轻、足够稳。</p>
+      <p class="source-tip">· 本页内容仅代表资料整理视角，不构成任何引导或推荐 ·</p>
+    </div>
+
+    <!-- 底部细线，纯装饰 -->
+    <hr class="soft">
+
+    <div style="text-align: right; font-size: 0.8rem; color: #6e9d97; margin-top: 0.5rem; padding-bottom: 1rem;">
+      <span>内容索引 · 2025</span>
+    </div>
+
+  </div>
+</body>
+</html>
